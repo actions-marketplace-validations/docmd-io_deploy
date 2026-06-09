@@ -1,0 +1,51 @@
+name: 'docmd Deploy'
+description: 'Build and deploy documentation with docmd to GitHub Pages'
+author: 'docmd.io'
+
+inputs:
+  node:
+    description: 'Node.js version'
+    default: '20'
+    required: false
+
+outputs:
+  site-dir:
+    description: 'Output directory of the built site'
+    value: ${{ steps.build.outputs.site_dir }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node }}
+        cache: 'npm'
+
+    - name: Detect or init docmd
+      shell: bash
+      run: |
+        CONFIG=$(find . -maxdepth 2 \( -name "docmd.config.json" -o -name "docmd.config.js" -o -name "docmd.config.ts" \) 2>/dev/null | grep -v node_modules | head -1)
+        if [ -z "$CONFIG" ]; then
+          echo "No config found — running init"
+          npx @docmd/core init
+        else
+          echo "Found: $CONFIG"
+        fi
+
+    - name: Install
+      shell: bash
+      run: |
+        if [ -f package.json ]; then npm ci; else npm install @docmd/core; fi
+
+    - name: Build
+      id: build
+      shell: bash
+      run: |
+        npx @docmd/core build
+        OUT=$(node -e "try{console.log(require('./docmd.config.json').out||'site')}catch{console.log('site')}" 2>/dev/null || echo "site")
+        echo "site_dir=$OUT" >> $GITHUB_OUTPUT
+
+branding:
+  icon: 'book'
+  color: 'blue'
