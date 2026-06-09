@@ -66,8 +66,8 @@ jobs:
 
 ## First-time setup
 
-* GitHub Pages must be set to deploy from **GitHub Actions** (not a branch).
-* Go to **Settings → Pages → Source → GitHub Actions**.
+GitHub Pages must be set to deploy from **GitHub Actions** (not a branch).
+Go to **Settings → Pages → Source → GitHub Actions**.
 
 This is a one-time step per repo.
 
