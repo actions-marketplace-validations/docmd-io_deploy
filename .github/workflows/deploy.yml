@@ -33,7 +33,7 @@ jobs:
           fetch-depth: 0
 
       - name: Build
-        uses: docmd-io/deploy@v1
+        uses: docmd-io/deploy@v1.1
         id: build
         with:
           node: ${{ inputs.node }}
