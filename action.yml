@@ -1,5 +1,5 @@
-name: 'docmd deploy'
-description: 'Build and deploy documentation with docmd to GitHub Pages with zero config.'
+name: 'Build and Deploy Documentation with docmd'
+description: 'Build and deploy your docmd documentation site to GitHub Pages - zero config, auto-detects your setup.'
 author: 'docmd'
 
 inputs:
