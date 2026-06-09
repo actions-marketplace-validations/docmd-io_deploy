@@ -1,6 +1,6 @@
-name: 'docmd Deploy'
-description: 'Build and deploy documentation with docmd to GitHub Pages'
-author: 'docmd.io'
+name: 'docmd deploy'
+description: 'Build and deploy documentation with docmd to GitHub Pages with zero config.'
+author: 'docmd'
 
 inputs:
   node:
@@ -47,5 +47,5 @@ runs:
         echo "site_dir=$OUT" >> $GITHUB_OUTPUT
 
 branding:
-  icon: 'book'
+  icon: 'feather'
   color: 'blue'
